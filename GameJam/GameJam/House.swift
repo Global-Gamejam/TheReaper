@@ -39,6 +39,11 @@ class House: NSObject {
     class func generateHouse(currentLevel: Int) -> House {
         var newHouse = House()
         
+        if currentLevel == 1 {
+            newHouse.housePart.append(HousePart.Ext)
+            newHouse.housePart.append(HousePart.Ext)
+        }
+        
         newHouse.housePart.append(HousePart.Ext)
         newHouse.housePart.append(HousePart.Begin)
         for var index = 0; index < currentLevel; index++ {
@@ -63,7 +68,7 @@ class HouseContainer: NSObject {
     }
     
     private class func initSpriteHousePart(scene: SKScene) {
-        var positionX: CGFloat = 300
+        var positionX: CGFloat = 0
         for var index = 0; index < 3; index++ {
             var currentSprite: SKSpriteNode = HousePart.getSKSPriteNode(self.sharedInstance.container[0].housePart[index])()
             currentSprite.position = CGPointMake(positionX, currentSprite.size.height / 2)

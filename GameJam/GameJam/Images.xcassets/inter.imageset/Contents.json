@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "inté_maison-1.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "inté_maison.png"
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
