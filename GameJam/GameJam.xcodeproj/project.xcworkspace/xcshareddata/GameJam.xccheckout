@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>61B0EF06-D9EB-4700-8E7D-1654F7230D52</string>
+	<key>IDESourceControlProjectName</key>
+	<string>GameJam</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AAA649552AA9118190F9A71C6355675F8DFA7C71</key>
+		<string>https://github.com/JulienGenoud/gamejam.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>GameJam/GameJam.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AAA649552AA9118190F9A71C6355675F8DFA7C71</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/JulienGenoud/gamejam.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AAA649552AA9118190F9A71C6355675F8DFA7C71</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AAA649552AA9118190F9A71C6355675F8DFA7C71</string>
+			<key>IDESourceControlWCCName</key>
+			<string>gamejam</string>
+		</dict>
+	</array>
+</dict>
+</plist>
