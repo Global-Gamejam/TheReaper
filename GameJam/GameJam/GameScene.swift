@@ -10,11 +10,14 @@ import SpriteKit
 
 class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
+        HouseContainer.initHouseContainer(self)
     }
-    
+
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        
     }
-   
+
     override func update(currentTime: CFTimeInterval) {
+        HouseContainer.updateBackGroundHouse(self)
     }
 }
