@@ -28,6 +28,7 @@ enum HousePart {
             spriteName = "ext"
         }
         var sprite = SKSpriteNode(imageNamed: spriteName!)
+        sprite.name = spriteName
         return sprite
     }
 }
@@ -59,6 +60,7 @@ class HouseContainer: NSObject {
     var container = Array<House>()
     var index: Int = 2
     var currentSprite = Array<SKSpriteNode>()
+    var currentSpeed: CGFloat = 3.0
 
     class var sharedInstance: HouseContainer {
         struct Static {
@@ -68,7 +70,7 @@ class HouseContainer: NSObject {
     }
     
     private class func initSpriteHousePart(scene: SKScene) {
-        var positionX: CGFloat = 0
+        var positionX: CGFloat = UIScreen.mainScreen().bounds.size.height / 2
         for var index = 0; index < 3; index++ {
             var currentSprite: SKSpriteNode = HousePart.getSKSPriteNode(self.sharedInstance.container[0].housePart[index])()
             currentSprite.position = CGPointMake(positionX, currentSprite.size.height / 2)
@@ -97,6 +99,11 @@ class HouseContainer: NSObject {
                 newSprite.position = CGPointMake(self.sharedInstance.currentSprite[1].position.x + self.sharedInstance.currentSprite[1].size.width,
                     newSprite.size.height / 2)
                 scene.addChild(newSprite)
+                
+                if newSprite.name == "inter" {
+                    GeneratePlateform.generatePlateform(scene, currentPosition: newSprite.position)
+                }
+                
                 self.sharedInstance.currentSprite.append(newSprite)
                 return ;
             }
@@ -106,6 +113,9 @@ class HouseContainer: NSObject {
     
     private class func regenateSpriteContainer(scene: SKScene) {
         if self.sharedInstance.currentSprite[0].position.x + (self.sharedInstance.currentSprite[0].size.width / 2) <= 0 {
+            if self.sharedInstance.currentSprite[0].name == "end_house" {
+                self.sharedInstance.currentSpeed += 1
+            }
             self.sharedInstance.currentSprite[0].removeFromParent()
             self.sharedInstance.currentSprite.removeAtIndex(0)
             self.sharedInstance.index += 1
@@ -116,7 +126,7 @@ class HouseContainer: NSObject {
     
     class func updateBackGroundHouse(scene: SKScene) {
         for currentSprite in self.sharedInstance.currentSprite {
-            currentSprite.position = CGPointMake(currentSprite.position.x - 10, currentSprite.position.y)
+            currentSprite.position = CGPointMake(currentSprite.position.x - self.sharedInstance.currentSpeed, currentSprite.position.y)
         }
         self.regenateSpriteContainer(scene)
     }
