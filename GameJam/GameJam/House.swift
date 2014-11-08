@@ -75,6 +75,7 @@ class HouseContainer: NSObject {
             var currentSprite: SKSpriteNode = HousePart.getSKSPriteNode(self.sharedInstance.container[0].housePart[index])()
             currentSprite.position = CGPointMake(positionX, currentSprite.size.height / 2)
             
+            GeneratePlateform.generateFloor(scene, currentPosition: currentSprite.position)
             self.sharedInstance.currentSprite.append(currentSprite)
             positionX += currentSprite.size.width
             scene.addChild(currentSprite)
@@ -100,6 +101,7 @@ class HouseContainer: NSObject {
                     newSprite.size.height / 2)
                 scene.addChild(newSprite)
                 
+                GeneratePlateform.generateFloor(scene, currentPosition: newSprite.position)
                 if newSprite.name == "inter" {
                     GeneratePlateform.generatePlateform(scene, currentPosition: newSprite.position)
                 }

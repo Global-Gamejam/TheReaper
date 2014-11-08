@@ -17,7 +17,7 @@ class Player: NSObject {
     
     override init() {
         super.init()
-        playerSprite.position = CGPoint(x: UIScreen.mainScreen().bounds.size.width / 3, y: 30)
+        playerSprite.position = CGPoint(x: UIScreen.mainScreen().bounds.size.width / 3, y: UIScreen.mainScreen().bounds.size.height / 2)
         playerSprite.zPosition = 2
         playerSprite.physicsBody = SKPhysicsBody(rectangleOfSize: self.playerSprite.size)
         playerSprite.physicsBody?.dynamic = true
