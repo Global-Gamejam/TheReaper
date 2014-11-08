@@ -52,7 +52,14 @@ class Player: NSObject {
 //        self.playerSprite.runAction(repeatAction);
     }
     
+    func positionFix() {
+        if self.playerSprite.position.x != UIScreen.mainScreen().bounds.size.width / 3 {
+            self.playerSprite.runAction(SKAction.moveToX(UIScreen.mainScreen().bounds.size.width / 3, duration: 0.5), completion: nil)
+        }
+    }
+    
     func PlayerJump() {
-        playerSprite.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 25))
+        playerSprite.physicsBody?.velocity = CGVectorMake(0, 0)
+        playerSprite.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 24))
     }
 }
