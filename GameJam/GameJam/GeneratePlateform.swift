@@ -22,6 +22,7 @@ class GeneratePlateform: NSObject {
         plateform1.physicsBody?.mass = 100000000
         plateform1.physicsBody?.dynamic = false
         plateform1.physicsBody?.affectedByGravity = false
+        plateform1.shadowCastBitMask = 1
         
         var plateform2 = SKSpriteNode(color: UIColor.greenColor(), size: CGSizeMake(scene.size.width / 2 - plateform1.size.width - 80, 10))
         
@@ -33,6 +34,7 @@ class GeneratePlateform: NSObject {
         plateform2.physicsBody?.mass = 100000000
         plateform2.physicsBody?.dynamic = false
         plateform2.physicsBody?.affectedByGravity = false
+        plateform2.shadowCastBitMask = 1
         
         plateform1.physicsBody?.categoryBitMask = CollisionCategory.Floor.rawValue
         plateform1.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue
@@ -62,9 +64,11 @@ class GeneratePlateform: NSObject {
         plateform.physicsBody?.mass = 100000000
         plateform.physicsBody?.dynamic = false
         plateform.physicsBody?.affectedByGravity = false
+        plateform.shadowCastBitMask = 1
         
         plateform.physicsBody?.categoryBitMask = CollisionCategory.Floor.rawValue
-        plateform.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue | CollisionCategory.Item.rawValue
+        plateform.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue |
+            CollisionCategory.ItemMalus.rawValue | CollisionCategory.ItemBonus.rawValue | CollisionCategory.ItemNone.rawValue
         
         GenerateItem.addItem(scene, position: plateform.position, widthSize: plateform.size.width)
         
@@ -85,6 +89,7 @@ class GeneratePlateform: NSObject {
         plateform.physicsBody?.mass = 100000000
         plateform.physicsBody?.dynamic = false
         plateform.physicsBody?.affectedByGravity = false
+        plateform.shadowCastBitMask = 1
         
         plateform.physicsBody?.categoryBitMask = CollisionCategory.Plateform.rawValue
         plateform.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue

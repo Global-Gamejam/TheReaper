@@ -43,6 +43,7 @@ class GameScene: SKScene {
         self.initFloorPlateform()
         
         self.addChild(self.player.playerSprite)
+        //self.addChild(self.player.ligth)
         self.addChild(self.monster.node)
     }
 
@@ -53,6 +54,6 @@ class GameScene: SKScene {
     override func update(currentTime: CFTimeInterval) {
         HouseContainer.updateBackGroundHouse(self)
         GeneratePlateform.updatePlateform(self)
-        self.player.positionFix()
+        //self.player.positionFix()
     }
 }

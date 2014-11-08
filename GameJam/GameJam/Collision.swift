@@ -21,7 +21,9 @@ enum CollisionCategory: UInt32 {
     case Plateform = 3
     case Monster = 4
     case Down = 5
-    case Item = 6
+    case ItemMalus = 6
+    case ItemBonus = 7
+    case ItemNone = 8
 }
 
 extension GameScene: SKPhysicsContactDelegate {
@@ -51,6 +53,17 @@ extension GameScene: SKPhysicsContactDelegate {
         }
     }
     
+    private func handleItemCollision(categoryNode: (CollisionCategory, CollisionCategory), node: SKNode) {
+        switch categoryNode {
+        case (CollisionCategory.Player, CollisionCategory.ItemMalus), (CollisionCategory.ItemMalus, CollisionCategory.Player):
+            NSLog("Move monster")
+        case (CollisionCategory.Player, CollisionCategory.ItemNone), (CollisionCategory.ItemNone, CollisionCategory.Player):
+            println("Normal Item")
+            node.removeFromParent()
+        default: return Void()
+        }
+    }
+    
     func didEndContact(contact: SKPhysicsContact) {
         if contact.bodyA.node?.name == nil || contact.bodyB.node?.name == nil {
             return Void()
@@ -60,8 +73,9 @@ extension GameScene: SKPhysicsContactDelegate {
             (contact.bodyA.node?.physicsBody!.categoryBitMask)!)!,
             CollisionCategory(rawValue: (contact.bodyB.node?.physicsBody!.categoryBitMask)!)!)
         let tmpCategory = self.player.currentStatus
-
+        
         self.handlePLayerCollision(categoryNode)
+        self.handleItemCollision(categoryNode, node: ((contact.bodyA.node!.name! == "player") ? contact.bodyB.node! : contact.bodyA.node!))
         if tmpCategory != self.player.currentStatus {
             self.checkPositionPlayer()
             self.monster.updatePosition(self.player)

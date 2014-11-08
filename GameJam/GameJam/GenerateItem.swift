@@ -24,14 +24,25 @@ class GenerateItem: NSObject {
             node = SKSpriteNode(color: UIColor.orangeColor(), size: CGSizeMake(10, 30))
         }
         node.name = "item"
+        node.shadowCastBitMask = 1
         node.physicsBody = SKPhysicsBody(rectangleOfSize: node.size)
         node.physicsBody?.affectedByGravity = true
         node.position = CGPointMake((CGFloat(rand()) % (widthSize / 2)) + position.x, position.y + node.size.height / 2 + 7)
         
-        node.physicsBody?.categoryBitMask = CollisionCategory.Item.rawValue
+        switch randomNumber {
+        case 0:
+            node.physicsBody?.categoryBitMask = CollisionCategory.ItemBonus.rawValue
+        case 1:
+            node.physicsBody?.categoryBitMask = CollisionCategory.ItemMalus.rawValue
+        case 2:
+            node.physicsBody?.categoryBitMask = CollisionCategory.ItemNone.rawValue
+        default:Void()
+        }
+        
         node.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue |
             CollisionCategory.Floor.rawValue | CollisionCategory.Plateform.rawValue
-        node.physicsBody?.contactTestBitMask = CollisionCategory.Floor.rawValue | CollisionCategory.Plateform.rawValue | CollisionCategory.Down.rawValue
+//        node.physicsBody?.contactTestBitMask = CollisionCategory.Floor.rawValue |
+//            CollisionCategory.Plateform.rawValue | CollisionCategory.Down.rawValue
 
         node.zPosition = 3
         

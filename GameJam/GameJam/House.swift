@@ -27,7 +27,8 @@ enum HousePart {
         case Ext:
             spriteName = "ext"
         }
-        var sprite = SKSpriteNode(imageNamed: spriteName!)
+        var sprite = SKSpriteNode(imageNamed: spriteName!, normalMapped: true)
+        sprite.lightingBitMask = 1
         sprite.name = spriteName
         return sprite
     }
@@ -60,7 +61,7 @@ class HouseContainer: NSObject {
     var container = Array<House>()
     var index: Int = 2
     var currentSprite = Array<SKSpriteNode>()
-    var currentSpeed: CGFloat = 3.0
+    var currentSpeed: CGFloat = 5.0
 
     class var sharedInstance: HouseContainer {
         struct Static {
@@ -116,7 +117,7 @@ class HouseContainer: NSObject {
     private class func regenateSpriteContainer(scene: SKScene) {
         if self.sharedInstance.currentSprite[0].position.x + (self.sharedInstance.currentSprite[0].size.width / 2) <= 0 {
             if self.sharedInstance.currentSprite[0].name == "end_house" {
-                self.sharedInstance.currentSpeed += 1
+                self.sharedInstance.currentSpeed += 0.25
             }
             self.sharedInstance.currentSprite[0].removeFromParent()
             self.sharedInstance.currentSprite.removeAtIndex(0)
