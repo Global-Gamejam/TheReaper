@@ -13,16 +13,24 @@ class Player: NSObject {
     
     //let textureAtlas = SKTextureAtlas(named:"perso.atlas")
     var playerSprite = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(30, 30))
-    var spriteArray = Array<SKTexture>()
+    //var spriteArray = Array<SKTexture>()
+    var currentStatus: CurrentPosition = CurrentPosition.Floor
+    
     
     override init() {
         super.init()
+        playerSprite.name = "player"
         playerSprite.position = CGPoint(x: UIScreen.mainScreen().bounds.size.width / 3, y: UIScreen.mainScreen().bounds.size.height / 2)
         playerSprite.zPosition = 2
         playerSprite.physicsBody = SKPhysicsBody(rectangleOfSize: self.playerSprite.size)
         playerSprite.physicsBody?.dynamic = true
         playerSprite.physicsBody?.affectedByGravity = true
         playerSprite.physicsBody?.allowsRotation = false
+        
+        playerSprite.physicsBody?.categoryBitMask = CollisionCategory.Player.rawValue
+        playerSprite.physicsBody?.collisionBitMask = CollisionCategory.Floor.rawValue | CollisionCategory.Plateform.rawValue |
+            CollisionCategory.Down.rawValue
+        playerSprite.physicsBody?.contactTestBitMask = CollisionCategory.Floor.rawValue | CollisionCategory.Plateform.rawValue | CollisionCategory.Down.rawValue
     }
     
     func PlayerUpdate(view: SKView) {
