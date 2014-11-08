@@ -24,14 +24,15 @@ class GenerateItem: NSObject {
             node = SKSpriteNode(color: UIColor.orangeColor(), size: CGSizeMake(10, 30))
         }
         node.name = "item"
-//        node.physicsBody = SKPhysicsBody(rectangleOfSize: node.size)
-//        node.physicsBody?.affectedByGravity = true
-        node.position = CGPointMake((CGFloat(rand()) % (widthSize / 2)) + position.x, position.y)
+        node.physicsBody = SKPhysicsBody(rectangleOfSize: node.size)
+        node.physicsBody?.affectedByGravity = true
+        node.position = CGPointMake((CGFloat(rand()) % (widthSize / 2)) + position.x, position.y + node.size.height / 2 + 7)
         
-//        node.physicsBody?.categoryBitMask = CollisionCategory.Item.rawValue
-//        node.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue
-//        node.physicsBody?.contactTestBitMask = CollisionCategory.Floor.rawValue | CollisionCategory.Plateform.rawValue | CollisionCategory.Down.rawValue
-//
+        node.physicsBody?.categoryBitMask = CollisionCategory.Item.rawValue
+        node.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue |
+            CollisionCategory.Floor.rawValue | CollisionCategory.Plateform.rawValue
+        node.physicsBody?.contactTestBitMask = CollisionCategory.Floor.rawValue | CollisionCategory.Plateform.rawValue | CollisionCategory.Down.rawValue
+
         node.zPosition = 3
         
         scene.addChild(node)

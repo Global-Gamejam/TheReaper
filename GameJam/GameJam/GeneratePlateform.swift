@@ -39,7 +39,6 @@ class GeneratePlateform: NSObject {
         plateform2.physicsBody?.categoryBitMask = CollisionCategory.Floor.rawValue
         plateform2.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue
         
-        println("add item from double floor")
         GenerateItem.addItem(scene, position: plateform1.position, widthSize: plateform1.size.width)
         GenerateItem.addItem(scene, position: plateform2.position, widthSize: plateform2.size.width)
         
@@ -67,8 +66,6 @@ class GeneratePlateform: NSObject {
         plateform.physicsBody?.categoryBitMask = CollisionCategory.Floor.rawValue
         plateform.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue | CollisionCategory.Item.rawValue
         
-        println("add plateform from floor")
-        
         GenerateItem.addItem(scene, position: plateform.position, widthSize: plateform.size.width)
         
         scene.addChild(plateform)
@@ -79,8 +76,6 @@ class GeneratePlateform: NSObject {
             return Void()
         }
         var plateform = SKSpriteNode(color: UIColor.brownColor(), size: CGSizeMake(UIScreen.mainScreen().bounds.size.width / 2, 10))
-        
-        println("add plateform form plateform")
         
         plateform.position = CGPointMake(currentPosition.x, scene.size.height - scene.size.height / 3)
         plateform.name = "plateform"
@@ -116,6 +111,11 @@ class GeneratePlateform: NSObject {
         
         scene.enumerateChildNodesWithName("item", usingBlock: { (node: SKNode!, obj:UnsafeMutablePointer<ObjCBool>) -> Void in
             node.position = CGPointMake(node.position.x - HouseContainer.sharedInstance.currentSpeed, node.position.y)
+            
+            if node.position.x - node.frame.size.width / 2 <= 5 {
+                node.physicsBody = nil
+            }
+            
             if node.position.x + node.frame.size.width / 2 <= 0 {
                 node.removeFromParent()
             }
