@@ -55,14 +55,12 @@ extension GameScene: SKPhysicsContactDelegate {
     
     private func handleItemCollision(categoryNode: (CollisionCategory, CollisionCategory), node: SKNode) {
         switch categoryNode {
-        case (CollisionCategory.Player, CollisionCategory.ItemMalus), (CollisionCategory.ItemMalus, CollisionCategory.Player):
-            NSLog("Move monster")
+        case (CollisionCategory.Player, CollisionCategory.ItemMalus), (CollisionCategory.ItemMalus, CollisionCategory.Player):Void()
         case (CollisionCategory.Player, CollisionCategory.ItemNone), (CollisionCategory.ItemNone, CollisionCategory.Player):
-            println("Normal Item")
             node.removeFromParent()
-            ParticuleManager.runParticule(self, position: self.player.playerSprite.position)
-        case (CollisionCategory.Player, CollisionCategory.ItemBonus), (CollisionCategory.ItemBonus, CollisionCategory.Player):
-            println("Bonus Item")
+            //run Particule
+            //ParticuleManager.runParticule(self, position: node.position)
+        case (CollisionCategory.Player, CollisionCategory.ItemBonus), (CollisionCategory.ItemBonus, CollisionCategory.Player): Void()
         default: return Void()
         }
     }

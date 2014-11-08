@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class Monster: NSObject {
-    var node = SKSpriteNode(color: UIColor.grayColor(), size: CGSizeMake(60, 60))
+    var node = SKSpriteNode(imageNamed: "monster1")
     var currentPosition: CurrentPosition = CurrentPosition.Floor
     var saveBody: SKPhysicsBody!
     

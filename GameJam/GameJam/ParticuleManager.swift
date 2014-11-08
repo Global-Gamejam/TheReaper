@@ -11,13 +11,11 @@ import SpriteKit
 
 class ParticuleManager: NSObject {
     class func runParticule(scene: SKScene, position: CGPoint) {
-        
         let particulePath = NSBundle.mainBundle().pathForResource("Broke", ofType: "sks")
         let particule: SKEmitterNode? = NSKeyedUnarchiver.unarchiveObjectWithFile(particulePath!) as? SKEmitterNode
         
-        particule?.particlePosition = CGPointMake(100, 100);
-        particule?.particleBirthRate = 1;
-        particule?.zPosition = 3
+        particule?.particlePosition = position;
+        particule?.zPosition = 4
         particule?.position = position
         scene.addChild(particule!)
     }

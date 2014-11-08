@@ -27,7 +27,7 @@ enum HousePart {
         case Ext:
             spriteName = "ext"
         }
-        var sprite = SKSpriteNode(imageNamed: spriteName!, normalMapped: true)
+        var sprite = PreloadData.makeSKSPriteNode(spriteName!)!//SKSpriteNode(imageNamed: spriteName!, normalMapped: true)
         sprite.lightingBitMask = 1
         sprite.name = spriteName
         return sprite

@@ -7,15 +7,37 @@
 //
 
 import UIKit
+import SpriteKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    func loadData() {
+        //background loading
+        PreloadData.addData(SKTexture(imageNamed: "begin_house"), key: "begin_house")
+        PreloadData.addData(SKTexture(imageNamed: "end_house"), key: "end_house")
+        PreloadData.addData(SKTexture(imageNamed: "inter"), key: "inter")
+        PreloadData.addData(SKTexture(imageNamed: "ext"), key: "ext")
+        
+        //item loading
+        PreloadData.addData(SKTexture(imageNamed: "cabinet"), key: "cabinet")
+        PreloadData.addData(SKTexture(imageNamed: "chair"), key: "chair")
+        PreloadData.addData(SKTexture(imageNamed: "table"), key: "table")
 
+        //monster loading
+        PreloadData.addData(SKTexture(imageNamed: "monster1"), key: "monster1")
+        
+        //frame Animation Perso
+        for var index = 1; index < 23; index++ {
+            PreloadData.addData(SKTexture(imageNamed: "frame\(index)"), key: "frame\(index)")
+        }
+    }
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        self.loadData()
         srand(UInt32(time(nil)))
         return true
     }

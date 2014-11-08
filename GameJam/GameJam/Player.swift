@@ -11,8 +11,9 @@ import SpriteKit
 
 class Player: NSObject {
     
-    var playerSprite = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(30, 30))
+    var playerSprite = PreloadData.makeSKSPriteNode("frame1")
     var currentStatus: CurrentPosition = CurrentPosition.Floor
+    var animationFrames = Array<SKTexture>()
     var ligth: SKLightNode!
     
     func addLightPlayer() {
@@ -20,12 +21,18 @@ class Player: NSObject {
         self.ligth.categoryBitMask = 1
         self.ligth.falloff = 1
         self.ligth.ambientColor = UIColor.whiteColor()
-        self.ligth.shadowColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
-        self.ligth.lightColor = UIColor.whiteColor().colorWithAlphaComponent(0.8)
+        self.ligth.shadowColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        self.ligth.lightColor = UIColor.whiteColor().colorWithAlphaComponent(1)
         self.ligth.zPosition = 3
         self.ligth.categoryBitMask = 1
         self.ligth.position = CGPointZero
         self.playerSprite.addChild(self.ligth)
+    }
+    
+    func initAnimationSprite() {
+        for var index = 1; index < 23; index++ {
+            self.animationFrames.append(PreloadData.getData("frame\(index)") as SKTexture)
+        }
     }
     
     override init() {
@@ -45,13 +52,19 @@ class Player: NSObject {
         playerSprite.physicsBody?.contactTestBitMask = CollisionCategory.Floor.rawValue | CollisionCategory.Plateform.rawValue | CollisionCategory.Down.rawValue
         
         self.addLightPlayer()
+        self.initAnimationSprite()
+        self.runAnimation()
     }
     
     func positionFix() {
         if self.playerSprite.position.x != UIScreen.mainScreen().bounds.size.width / 3 {
             self.playerSprite.runAction(SKAction.moveToX(UIScreen.mainScreen().bounds.size.width / 3, duration: 0.5), completion: nil)
-//            self.ligth.runAction(SKAction.moveToX(UIScreen.mainScreen().bounds.size.width / 3, duration: 0.5), completion: nil)
         }
+    }
+    
+    func runAnimation() {
+        let animation = SKAction.repeatActionForever(SKAction.animateWithTextures(self.animationFrames, timePerFrame: 0.03, resize: true, restore: false))
+        self.playerSprite.runAction(animation)
     }
     
     func PlayerJump() {
