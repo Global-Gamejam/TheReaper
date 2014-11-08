@@ -53,5 +53,6 @@ class GameScene: SKScene {
     override func update(currentTime: CFTimeInterval) {
         HouseContainer.updateBackGroundHouse(self)
         GeneratePlateform.updatePlateform(self)
+        self.player.positionFix()
     }
 }

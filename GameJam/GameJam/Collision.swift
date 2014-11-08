@@ -21,6 +21,7 @@ enum CollisionCategory: UInt32 {
     case Plateform = 3
     case Monster = 4
     case Down = 5
+    case Item = 6
 }
 
 extension GameScene: SKPhysicsContactDelegate {

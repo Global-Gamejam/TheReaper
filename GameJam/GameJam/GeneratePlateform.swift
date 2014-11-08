@@ -12,7 +12,7 @@ import SpriteKit
 class GeneratePlateform: NSObject {
    
     private class func generateWollPlateform(scene: SKScene, currentPosition: CGPoint) {
-        var plateform1 = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(CGFloat(rand()) % (scene.size.width / 2 - 140) + 50, 10))
+        var plateform1 = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(CGFloat(rand()) % (scene.size.width / 2 - 160) + 50, 10))
         
         plateform1.position = CGPointMake(currentPosition.x - scene.size.width / 4 + plateform1.size.width / 2, scene.size.height / 3)
         plateform1.name = "floor"
@@ -23,7 +23,7 @@ class GeneratePlateform: NSObject {
         plateform1.physicsBody?.dynamic = false
         plateform1.physicsBody?.affectedByGravity = false
         
-        var plateform2 = SKSpriteNode(color: UIColor.greenColor(), size: CGSizeMake(scene.size.width / 2 - plateform1.size.width - 70, 10))
+        var plateform2 = SKSpriteNode(color: UIColor.greenColor(), size: CGSizeMake(scene.size.width / 2 - plateform1.size.width - 80, 10))
         
         plateform2.position = CGPointMake(currentPosition.x + scene.size.width / 4 - plateform2.size.width / 2, scene.size.height / 3)
         plateform2.name = "floor"
@@ -34,18 +34,21 @@ class GeneratePlateform: NSObject {
         plateform2.physicsBody?.dynamic = false
         plateform2.physicsBody?.affectedByGravity = false
         
-        
         plateform1.physicsBody?.categoryBitMask = CollisionCategory.Floor.rawValue
         plateform1.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue
         plateform2.physicsBody?.categoryBitMask = CollisionCategory.Floor.rawValue
         plateform2.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue
+        
+        println("add item from double floor")
+        GenerateItem.addItem(scene, position: plateform1.position, widthSize: plateform1.size.width)
+        GenerateItem.addItem(scene, position: plateform2.position, widthSize: plateform2.size.width)
         
         scene.addChild(plateform1)
         scene.addChild(plateform2)
     }
     
     class func generateFloor(scene: SKScene, currentPosition: CGPoint) {
-        if rand() % 3 == 0 {
+        if rand() % 4 == 0 {
             self.generateWollPlateform(scene, currentPosition: currentPosition)
             return Void()
         }
@@ -62,7 +65,11 @@ class GeneratePlateform: NSObject {
         plateform.physicsBody?.affectedByGravity = false
         
         plateform.physicsBody?.categoryBitMask = CollisionCategory.Floor.rawValue
-        plateform.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue
+        plateform.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue | CollisionCategory.Item.rawValue
+        
+        println("add plateform from floor")
+        
+        GenerateItem.addItem(scene, position: plateform.position, widthSize: plateform.size.width)
         
         scene.addChild(plateform)
     }
@@ -72,6 +79,8 @@ class GeneratePlateform: NSObject {
             return Void()
         }
         var plateform = SKSpriteNode(color: UIColor.brownColor(), size: CGSizeMake(UIScreen.mainScreen().bounds.size.width / 2, 10))
+        
+        println("add plateform form plateform")
         
         plateform.position = CGPointMake(currentPosition.x, scene.size.height - scene.size.height / 3)
         plateform.name = "plateform"
@@ -85,6 +94,8 @@ class GeneratePlateform: NSObject {
         plateform.physicsBody?.categoryBitMask = CollisionCategory.Plateform.rawValue
         plateform.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue
         
+        GenerateItem.addItem(scene, position: plateform.position, widthSize: plateform.size.width)
+        
         scene.addChild(plateform)
     }
     
@@ -97,6 +108,13 @@ class GeneratePlateform: NSObject {
         })
         
         scene.enumerateChildNodesWithName("floor", usingBlock: { (node: SKNode!, obj:UnsafeMutablePointer<ObjCBool>) -> Void in
+            node.position = CGPointMake(node.position.x - HouseContainer.sharedInstance.currentSpeed, node.position.y)
+            if node.position.x + node.frame.size.width / 2 <= 0 {
+                node.removeFromParent()
+            }
+        })
+        
+        scene.enumerateChildNodesWithName("item", usingBlock: { (node: SKNode!, obj:UnsafeMutablePointer<ObjCBool>) -> Void in
             node.position = CGPointMake(node.position.x - HouseContainer.sharedInstance.currentSpeed, node.position.y)
             if node.position.x + node.frame.size.width / 2 <= 0 {
                 node.removeFromParent()
