@@ -16,14 +16,6 @@ class Player: NSObject {
     var ligth: SKLightNode!
     
     func addLightPlayer() {
-//        SKLightNode* light = [[SKLightNode alloc] init];
-//        light.categoryBitMask = 1;
-//        light.falloff = 1;
-//        light.ambientColor = [UIColor whiteColor];
-//        light.lightColor = [[UIColor alloc] initWithRed:1.0 green:1.0 blue:0.0 alpha:0.5];
-//        light.shadowColor = [[UIColor alloc] initWithRed:0.0 green:0.0 blue:0.0 alpha:0.3];
-//        [fireEmmitter addChild:light];
-        
         self.ligth = SKLightNode()
         self.ligth.categoryBitMask = 1
         self.ligth.falloff = 1
@@ -45,11 +37,12 @@ class Player: NSObject {
         playerSprite.physicsBody?.dynamic = true
         playerSprite.physicsBody?.affectedByGravity = true
         playerSprite.physicsBody?.allowsRotation = false
+        playerSprite.physicsBody?.usesPreciseCollisionDetection = true
         
         playerSprite.physicsBody?.categoryBitMask = CollisionCategory.Player.rawValue
         playerSprite.physicsBody?.collisionBitMask = CollisionCategory.Floor.rawValue | CollisionCategory.Plateform.rawValue |
             CollisionCategory.Down.rawValue | CollisionCategory.ItemNone.rawValue
-        playerSprite.physicsBody?.contactTestBitMask = CollisionCategory.Floor.rawValue | CollisionCategory.Plateform.rawValue | CollisionCategory.Down.rawValue | CollisionCategory.ItemNone.rawValue
+        playerSprite.physicsBody?.contactTestBitMask = CollisionCategory.Floor.rawValue | CollisionCategory.Plateform.rawValue | CollisionCategory.Down.rawValue
         
         self.addLightPlayer()
     }

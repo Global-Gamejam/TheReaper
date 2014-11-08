@@ -39,9 +39,12 @@ class GenerateItem: NSObject {
         default:Void()
         }
         
-        node.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Monster.rawValue |
-            CollisionCategory.Floor.rawValue | CollisionCategory.Plateform.rawValue
-//        node.physicsBody?.contactTestBitMask = CollisionCategory.Floor.rawValue |
+        node.physicsBody?.usesPreciseCollisionDetection = true
+        
+        node.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Plateform.rawValue
+        node.physicsBody?.contactTestBitMask = CollisionCategory.Player.rawValue
+
+        //CollisionCategory.Floor.rawValue |
 //            CollisionCategory.Plateform.rawValue | CollisionCategory.Down.rawValue
 
         node.zPosition = 3
