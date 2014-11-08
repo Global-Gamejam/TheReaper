@@ -13,6 +13,7 @@ class GameScene: SKScene {
     var floorPlateform: SKSpriteNode!
     var player = Player()
     var monster = Monster()
+    var currentTime: NSTimeInterval = 0
     
     func initFloorPlateform() {
         self.floorPlateform = SKSpriteNode(color: UIColor.brownColor(), size: CGSizeMake(self.size.width, 10))
@@ -52,8 +53,16 @@ class GameScene: SKScene {
     }
 
     override func update(currentTime: CFTimeInterval) {
+        if self.currentTime == 0 {
+            self.currentTime += 3
+        }
+        
         HouseContainer.updateBackGroundHouse(self)
         GeneratePlateform.updatePlateform(self)
+        if self.currentTime <= currentTime {
+            //self.addMonster()
+            self.currentTime = currentTime + 3
+        }
         //self.player.positionFix()
     }
 }

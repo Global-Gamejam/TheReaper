@@ -28,10 +28,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //monster loading
         PreloadData.addData(SKTexture(imageNamed: "monster1"), key: "monster1")
+        PreloadData.addData(SKTexture(imageNamed: "monster2"), key: "monster2")
+        PreloadData.addData(SKTexture(imageNamed: "monster3"), key: "monster3")
+        PreloadData.addData(SKTexture(imageNamed: "monster4"), key: "monster4")
         
         //frame Animation Perso
         for var index = 1; index < 23; index++ {
             PreloadData.addData(SKTexture(imageNamed: "frame\(index)"), key: "frame\(index)")
+        }
+        
+        for var index = 1; index < 12; index++ {
+            PreloadData.addData(SKTexture(imageNamed: "course\(index)"), key: "course\(index)")
         }
     }
     

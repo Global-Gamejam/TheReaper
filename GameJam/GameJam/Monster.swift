@@ -10,9 +10,10 @@ import UIKit
 import SpriteKit
 
 class Monster: NSObject {
-    var node = SKSpriteNode(imageNamed: "monster1")
+    var node = PreloadData.makeSKSPriteNode("course1")
     var currentPosition: CurrentPosition = CurrentPosition.Floor
     var saveBody: SKPhysicsBody!
+    var animationFrames = Array<SKTexture>()
     
     override init() {
         super.init()
@@ -21,6 +22,21 @@ class Monster: NSObject {
         self.node.position = CGPointMake(30, UIScreen.mainScreen().bounds.size.height / 3 + self.node.size.height / 2 + 5)
         self.node.name = "monster"
         self.node.shadowCastBitMask = 1
+        println("init")
+        self.initAnimationSprite()
+        println("run")
+        self.runAnimation()
+    }
+    
+    func initAnimationSprite() {
+        for var index = 1; index < 12; index++ {
+            self.animationFrames.append(PreloadData.getData("course\(index)") as SKTexture)
+        }
+    }
+    
+    func runAnimation() {
+        let animation = SKAction.repeatActionForever(SKAction.animateWithTextures(self.animationFrames, timePerFrame: 0.05, resize: true, restore: false))
+        self.node.runAction(animation)
     }
     
     func updatePosition(player: Player) {

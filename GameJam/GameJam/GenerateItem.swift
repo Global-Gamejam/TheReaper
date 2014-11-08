@@ -20,23 +20,23 @@ class GenerateItem: NSObject {
         let randomNumber = rand() % 3
         var node: SKSpriteNode!
 
-        if randomNumber == 0 {
+        switch randomNumber {
+        case 0:
             node = PreloadData.makeSKSPriteNode("cabinet")
-        }
-        else if randomNumber == 1 {
+        case 1:
             node = PreloadData.makeSKSPriteNode("table")
-        }
-        else {
+        case 2:
             node = PreloadData.makeSKSPriteNode("chair")
+        default: return Void()
         }
+
         node.name = "item"
         
         node.position = CGPointMake(position.x, position.y + node.size.height / 2 + 7)
-        node.physicsBody = SKPhysicsBody(rectangleOfSize: node.size)
+        //node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(node.size.width / 2, node.size.height / 2))
         node.physicsBody?.affectedByGravity = true
 //        node.position = CGPointMake((CGFloat(rand()) % (widthSize / 2)) + position.x,
 //            position.y + node.size.height / 2 + 7)
-        
         switch randomNumber {
         case 0:
             node.physicsBody?.categoryBitMask = CollisionCategory.ItemBonus.rawValue

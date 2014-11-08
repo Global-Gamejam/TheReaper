@@ -24,6 +24,7 @@ enum CollisionCategory: UInt32 {
     case ItemMalus = 6
     case ItemBonus = 7
     case ItemNone = 8
+    case Monster1 = 9
 }
 
 extension GameScene: SKPhysicsContactDelegate {
@@ -60,7 +61,12 @@ extension GameScene: SKPhysicsContactDelegate {
             node.removeFromParent()
             //run Particule
             //ParticuleManager.runParticule(self, position: node.position)
-        case (CollisionCategory.Player, CollisionCategory.ItemBonus), (CollisionCategory.ItemBonus, CollisionCategory.Player): Void()
+        case (CollisionCategory.Player, CollisionCategory.ItemBonus), (CollisionCategory.ItemBonus, CollisionCategory.Player):
+            if self.player.playerSprite.position.x + 5 <= self.size.width / 2 {
+                println(node.name)
+                node.removeFromParent()
+                self.player.playerSprite.runAction(SKAction.moveToX(self.player.playerSprite.position.x + 5, duration: 0.5))
+            }
         default: return Void()
         }
     }

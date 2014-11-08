@@ -12,7 +12,7 @@ import SpriteKit
 class GeneratePlateform: NSObject {
    
     private class func generateWollPlateform(scene: SKScene, currentPosition: CGPoint) {
-        var plateform1 = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(CGFloat(rand()) % (scene.size.width / 2 - 160) + 50, 10))
+        var plateform1 = SKSpriteNode(color: UIColor.brownColor(), size: CGSizeMake(CGFloat(rand()) % (scene.size.width / 2 - 320) + 50, 10))
         
         plateform1.position = CGPointMake(currentPosition.x - scene.size.width / 4 + plateform1.size.width / 2, scene.size.height / 3)
         plateform1.name = "floor"
@@ -24,7 +24,7 @@ class GeneratePlateform: NSObject {
         plateform1.physicsBody?.affectedByGravity = false
         plateform1.shadowCastBitMask = 1
         
-        var plateform2 = SKSpriteNode(color: UIColor.greenColor(), size: CGSizeMake(scene.size.width / 2 - plateform1.size.width - 80, 10))
+        var plateform2 = SKSpriteNode(color: UIColor.brownColor(), size: CGSizeMake(scene.size.width / 2 - plateform1.size.width - 160, 10))
         
         plateform2.position = CGPointMake(currentPosition.x + scene.size.width / 4 - plateform2.size.width / 2, scene.size.height / 3)
         plateform2.name = "floor"
@@ -120,6 +120,14 @@ class GeneratePlateform: NSObject {
             if node.position.x - node.frame.size.width / 2 <= 5 {
                 node.physicsBody = nil
             }
+            
+            if node.position.x + node.frame.size.width / 2 <= 0 {
+                node.removeFromParent()
+            }
+        })
+        
+        scene.enumerateChildNodesWithName("monsterAdd", usingBlock: { (node: SKNode!, objc: UnsafeMutablePointer<ObjCBool>) -> Void in
+            node.position = CGPointMake(node.position.x - HouseContainer.sharedInstance.currentSpeed - 1, node.position.y)
             
             if node.position.x + node.frame.size.width / 2 <= 0 {
                 node.removeFromParent()

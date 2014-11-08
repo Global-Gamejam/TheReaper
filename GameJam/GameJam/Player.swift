@@ -11,7 +11,7 @@ import SpriteKit
 
 class Player: NSObject {
     
-    var playerSprite = PreloadData.makeSKSPriteNode("frame1")
+    var playerSprite = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(80, 80))
     var currentStatus: CurrentPosition = CurrentPosition.Floor
     var animationFrames = Array<SKTexture>()
     var ligth: SKLightNode!
@@ -19,7 +19,7 @@ class Player: NSObject {
     func addLightPlayer() {
         self.ligth = SKLightNode()
         self.ligth.categoryBitMask = 1
-        self.ligth.falloff = 1
+        //self.ligth.falloff = 1
         self.ligth.ambientColor = UIColor.whiteColor()
         self.ligth.shadowColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
         self.ligth.lightColor = UIColor.whiteColor().colorWithAlphaComponent(1)
@@ -63,12 +63,11 @@ class Player: NSObject {
     }
     
     func runAnimation() {
-        let animation = SKAction.repeatActionForever(SKAction.animateWithTextures(self.animationFrames, timePerFrame: 0.03, resize: true, restore: false))
+        let animation = SKAction.repeatActionForever(SKAction.animateWithTextures(self.animationFrames, timePerFrame: 0.05, resize: true, restore: false))
         self.playerSprite.runAction(animation)
     }
     
     func PlayerJump() {
-        playerSprite.physicsBody?.velocity = CGVectorMake(0, 0)
-        playerSprite.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 24))
+        playerSprite.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 250))
     }
 }
