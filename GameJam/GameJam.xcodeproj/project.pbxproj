@@ -244,11 +244,11 @@
 				TargetAttributes = {
 					BBDCC5BD1A0D6A0F00AA479F = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = TWD5NHZ9QB;
+						DevelopmentTeam = 44Q2J6374R;
 					};
 					BBDCC5D61A0D6A1000AA479F = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = TWD5NHZ9QB;
+						DevelopmentTeam = 44Q2J6374R;
 						TestTargetID = BBDCC5BD1A0D6A0F00AA479F;
 					};
 				};
