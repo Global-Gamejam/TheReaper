@@ -19,11 +19,11 @@ enum HousePart {
         var spriteName: String? = nil
         switch self {
         case Begin:
-            spriteName = "begin_house"
+            spriteName = "\(HouseContainer.sharedInstance.currentKindHouse)begin_house"
         case Inter:
-            spriteName = "inter"
+            spriteName = "\(HouseContainer.sharedInstance.currentKindHouse)inter\(rand() % 2)"
         case End:
-            spriteName = "end_house"
+            spriteName = "\(HouseContainer.sharedInstance.currentKindHouse)end_house"
         case Ext:
             spriteName = "ext"
         }
@@ -62,6 +62,7 @@ class HouseContainer: NSObject {
     var index: Int = 2
     var currentSprite = Array<SKSpriteNode>()
     var currentSpeed: CGFloat = 5.0
+    var currentKindHouse = 0
 
     class var sharedInstance: HouseContainer {
         struct Static {
@@ -84,7 +85,7 @@ class HouseContainer: NSObject {
     }
     
     class func initHouseContainer(scene: SKScene) {
-        for var index = 1; index < 20; index++ {
+        for var index = 1; index < 100; index++ {
             self.sharedInstance.container.append(House.generateHouse(index))
         }
         self.initSpriteHousePart(scene)
@@ -103,8 +104,13 @@ class HouseContainer: NSObject {
                 scene.addChild(newSprite)
                 
                 GeneratePlateform.generateFloor(scene, currentPosition: newSprite.position)
-                if newSprite.name == "inter" {
+                if newSprite.name != "\(HouseContainer.sharedInstance.currentKindHouse)begin_house" &&
+                    newSprite.name != "\(HouseContainer.sharedInstance.currentKindHouse)end_house" && newSprite.name != "ext" {
                     GeneratePlateform.generatePlateform(scene, currentPosition: newSprite.position)
+                }
+                
+                if newSprite.name == "\(HouseContainer.sharedInstance.currentKindHouse)end_house" {
+                    self.sharedInstance.currentKindHouse = ((self.sharedInstance.currentKindHouse == 0) ? 1 : 0)
                 }
                 
                 self.sharedInstance.currentSprite.append(newSprite)
@@ -116,7 +122,7 @@ class HouseContainer: NSObject {
     
     private class func regenateSpriteContainer(scene: SKScene) {
         if self.sharedInstance.currentSprite[0].position.x + (self.sharedInstance.currentSprite[0].size.width / 2) <= 0 {
-            if self.sharedInstance.currentSprite[0].name == "end_house" {
+            if self.sharedInstance.currentSprite[0].name == "\(HouseContainer.sharedInstance.currentKindHouse)end_house" {
                 self.sharedInstance.currentSpeed += 0.25
             }
             self.sharedInstance.currentSprite[0].removeFromParent()

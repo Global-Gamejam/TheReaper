@@ -14,6 +14,9 @@ class GameScene: SKScene {
     var player = Player()
     var monster = Monster()
     var currentTime: NSTimeInterval = 0
+    var currentTimeSong: NSTimeInterval = 0
+    var brume = PreloadData.makeSKSPriteNode("brume")
+    var currentSong = 0
     
     func initFloorPlateform() {
         self.floorPlateform = SKSpriteNode(color: UIColor.brownColor(), size: CGSizeMake(self.size.width, 10))
@@ -32,6 +35,10 @@ class GameScene: SKScene {
         self.floorPlateform.name = "down"
         self.floorPlateform.zPosition = 2
         self.addChild(self.floorPlateform)
+        
+        self.brume.position = CGPointMake(self.size.width + self.brume.size.width / 2, self.size.height / 3 + self.brume.size.height / 2)
+        self.brume.zPosition = 3
+        self.addChild(self.brume)
     }
     
     override func didMoveToView(view: SKView) {
@@ -44,25 +51,106 @@ class GameScene: SKScene {
         self.initFloorPlateform()
         
         self.addChild(self.player.playerSprite)
-        //self.addChild(self.player.ligth)
         self.addChild(self.monster.node)
+
+        self.runAction(SKAction.repeatActionForever(SKAction.playSoundFileNamed("main.mp3", waitForCompletion: true)))
     }
 
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.player.PlayerJump()
     }
 
+    func detectCollisionItem() {
+        self.enumerateChildNodesWithName("itemMalus", usingBlock: { (node: SKNode!, objc: UnsafeMutablePointer<ObjCBool>) -> Void in
+            
+            if node.intersectsNode(self.player.playerSprite) {
+                self.player.playerSprite.runAction(SKAction.playSoundFileNamed("crash.mp3", waitForCompletion: true))
+                self.player.playerSprite.position = CGPointMake(self.player.playerSprite.position.x - 30, self.player.playerSprite.position.y)
+
+                node.name = "item"
+                switch (node.frame.size.width, node.frame.size.height) {
+                case (64.5, 75.0):
+                    node.runAction(SKAction.animateWithTextures([PreloadData.getData("table+bouteilles1"),
+                        PreloadData.getData("table+bouteilles2"), PreloadData.getData("table+bouteilles3"),
+                        PreloadData.getData("table+bouteilles4")], timePerFrame: 0.04, resize: false, restore: false))
+                    break
+                case (175.0, 150.5):
+                    node.position = CGPointMake(node.position.x - 20, node.position.y - 10)
+                    node.runAction(SKAction.animateWithTextures([PreloadData.getData("armoire1"),
+                        PreloadData.getData("armoire2"), PreloadData.getData("armoire3"),
+                        PreloadData.getData("armoire4")], timePerFrame: 0.04, resize: true, restore: false))
+                    break
+                case (176.0, 151.5):
+                    node.runAction(SKAction.animateWithTextures([PreloadData.getData("TV1"),
+                        PreloadData.getData("TV2"), PreloadData.getData("TV3"),
+                        PreloadData.getData("TV4")], timePerFrame: 0.04, resize: false, restore: false))
+                    break
+                default: return Void()
+                }
+            }
+            
+        })
+
+        self.enumerateChildNodesWithName("itemBonus", usingBlock: { (node: SKNode!, objc: UnsafeMutablePointer<ObjCBool>) -> Void in
+            if node.intersectsNode(self.player.playerSprite) {
+                node.name = "item"
+
+                self.player.playerSprite.runAction(SKAction.playSoundFileNamed("crash.mp3", waitForCompletion: true))
+
+                self.player.playerSprite.position = CGPointMake(self.player.playerSprite.position.x + 10, self.player.playerSprite.position.y)
+                switch (node.frame.size.width, node.frame.size.height) {
+                case (105.5, 110):
+                    node.position = CGPointMake(node.position.x, node.position.y + 20)
+                    node.runAction(SKAction.animateWithTextures([PreloadData.getData("animcabinet1"),
+                        PreloadData.getData("animcabinet2"), PreloadData.getData("animcabinet3"),
+                        PreloadData.getData("animcabinet4")], timePerFrame: 0.04, resize: true, restore: false))
+                case (49.0, 105.5):
+                    node.position = CGPointMake(node.position.x, node.position.y + 20)
+                    node.runAction(SKAction.animateWithTextures([PreloadData.getData("watch1"),
+                        PreloadData.getData("watch2"), PreloadData.getData("watch3"),
+                        PreloadData.getData("watch4")], timePerFrame: 0.04, resize: true, restore: false))
+                    
+                default: Void()
+                }
+            }
+        })
+        
+    }
+    
     override func update(currentTime: CFTimeInterval) {
         if self.currentTime == 0 {
             self.currentTime += 3
         }
+        if self.currentTimeSong == 0 {
+            self.currentTimeSong += 15
+        }
+        self.brume.position = CGPointMake(self.brume.position.x - 1, self.brume.position.y)
         
         HouseContainer.updateBackGroundHouse(self)
         GeneratePlateform.updatePlateform(self)
         if self.currentTime <= currentTime {
-            //self.addMonster()
-            self.currentTime = currentTime + 3
+            self.addMonster()
+            self.currentTime = currentTime + Double(rand() % 5) + 1
         }
+        
+        if self.currentTimeSong <= currentTime {
+            self.runAction(SKAction.playSoundFileNamed("Cri_\(self.currentSong).wav", waitForCompletion: true))
+            self.currentSong += 1
+            if self.currentSong == 4 {
+                self.currentSong = 0
+            }
+            self.currentTimeSong += currentTime + 25
+        }
+        
+        self.enumerateChildNodesWithName("secondMonster", usingBlock: { (node: SKNode!, objc: UnsafeMutablePointer<ObjCBool>) -> Void in
+            node.position = CGPointMake(node.position.x - HouseContainer.sharedInstance.currentSpeed * 2, node.position.y)
+            
+            if node.position.x + node.frame.size.width / 2 <= 0 {
+                node.removeFromParent()
+            }
+        })
+        
+        self.detectCollisionItem()
         //self.player.positionFix()
     }
 }

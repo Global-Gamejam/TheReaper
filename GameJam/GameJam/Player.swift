@@ -15,13 +15,15 @@ class Player: NSObject {
     var currentStatus: CurrentPosition = CurrentPosition.Floor
     var animationFrames = Array<SKTexture>()
     var ligth: SKLightNode!
+    var particule: SKEmitterNode?
+    var isJumping: Bool = false
     
     func addLightPlayer() {
         self.ligth = SKLightNode()
         self.ligth.categoryBitMask = 1
         //self.ligth.falloff = 1
         self.ligth.ambientColor = UIColor.whiteColor()
-        self.ligth.shadowColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+        self.ligth.shadowColor = UIColor.blackColor().colorWithAlphaComponent(0.55)
         self.ligth.lightColor = UIColor.whiteColor().colorWithAlphaComponent(1)
         self.ligth.zPosition = 3
         self.ligth.categoryBitMask = 1
@@ -30,7 +32,7 @@ class Player: NSObject {
     }
     
     func initAnimationSprite() {
-        for var index = 1; index < 23; index++ {
+        for var index = 2; index < 22; index++ {
             self.animationFrames.append(PreloadData.getData("frame\(index)") as SKTexture)
         }
     }
@@ -54,6 +56,14 @@ class Player: NSObject {
         self.addLightPlayer()
         self.initAnimationSprite()
         self.runAnimation()
+        
+        let particulePath = NSBundle.mainBundle().pathForResource("Fire", ofType: "sks")
+        self.particule = NSKeyedUnarchiver.unarchiveObjectWithFile(particulePath!) as? SKEmitterNode
+        
+        self.particule?.particlePosition = CGPointMake(5, 20)
+        self.particule?.zPosition = 2
+        self.particule?.position = CGPointZero
+        self.playerSprite.addChild(particule!)
     }
     
     func positionFix() {
@@ -63,11 +73,18 @@ class Player: NSObject {
     }
     
     func runAnimation() {
-        let animation = SKAction.repeatActionForever(SKAction.animateWithTextures(self.animationFrames, timePerFrame: 0.05, resize: true, restore: false))
+        let animation = SKAction.repeatActionForever(SKAction.animateWithTextures(self.animationFrames, timePerFrame: 0.04, resize: true, restore: false))
         self.playerSprite.runAction(animation)
     }
     
     func PlayerJump() {
-        playerSprite.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 250))
+        if self.isJumping == true {
+            return Void()
+        }
+        self.isJumping = true
+        playerSprite.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 260))
+        self.playerSprite.runAction(SKAction.waitForDuration(0.70), completion: { () -> Void in
+            self.isJumping = false
+        })
     }
 }

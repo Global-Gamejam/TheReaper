@@ -46,12 +46,20 @@ extension GameScene: SKPhysicsContactDelegate {
         switch categoryNode {
         case (CollisionCategory.Player, CollisionCategory.Floor), (CollisionCategory.Floor, CollisionCategory.Player):
             self.player.currentStatus = CurrentPosition.Floor
+//            if self.player.playerSprite.position.y >= 490 {
+//                self.player.isJumping = false
+//            }
         case (CollisionCategory.Player, CollisionCategory.Plateform), (CollisionCategory.Plateform, CollisionCategory.Player):
             self.player.currentStatus = CurrentPosition.Up
+//            if self.player.playerSprite.position.y >= 300 {
+//                self.player.isJumping = false
+//            }
         case (CollisionCategory.Player, CollisionCategory.Down), (CollisionCategory.Down, CollisionCategory.Player):
             self.player.currentStatus = CurrentPosition.Down
-        default: Void()
+//            self.player.isJumping = false
+        default: return Void()
         }
+        println("current position Y : \(self.player.playerSprite.position.y)")
     }
     
     private func handleItemCollision(categoryNode: (CollisionCategory, CollisionCategory), node: SKNode) {
@@ -88,15 +96,15 @@ extension GameScene: SKPhysicsContactDelegate {
         }
     }
     
-    func didBeginContact(contact: SKPhysicsContact) {
-        if contact.bodyA.node?.name == nil || contact.bodyB.node?.name == nil {
-            return Void()
-        }
-        
-        let categoryNode: (CollisionCategory, CollisionCategory) = (CollisionCategory(rawValue:
-            (contact.bodyA.node?.physicsBody!.categoryBitMask)!)!,
-            CollisionCategory(rawValue: (contact.bodyB.node?.physicsBody!.categoryBitMask)!)!)
- 
-        self.handleItemCollision(categoryNode, node: ((contact.bodyA.node!.name! == "player") ? contact.bodyB.node! : contact.bodyA.node!))
-    }
+//    func didBeginContact(contact: SKPhysicsContact) {
+//        if contact.bodyA.node?.name == nil || contact.bodyB.node?.name == nil {
+//            return Void()
+//        }
+//        
+//        let categoryNode: (CollisionCategory, CollisionCategory) = (CollisionCategory(rawValue:
+//            (contact.bodyA.node?.physicsBody!.categoryBitMask)!)!,
+//            CollisionCategory(rawValue: (contact.bodyB.node?.physicsBody!.categoryBitMask)!)!)
+// 
+//        self.handleItemCollision(categoryNode, node: ((contact.bodyA.node!.name! == "player") ? contact.bodyB.node! : contact.bodyA.node!))
+//    }
 }

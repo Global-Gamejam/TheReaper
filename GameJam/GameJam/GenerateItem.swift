@@ -21,50 +21,37 @@ class GenerateItem: NSObject {
         var node: SKSpriteNode!
 
         switch randomNumber {
-        case 0:
-            node = PreloadData.makeSKSPriteNode("cabinet")
-        case 1:
-            node = PreloadData.makeSKSPriteNode("table")
+        case 0, 1:
+            let sprite = ["cabinet", "baseWatch"]
+            node = PreloadData.makeSKSPriteNode(sprite[random() % 2])
+            node.name = "itemBonus"
         case 2:
-            node = PreloadData.makeSKSPriteNode("chair")
+            let sprite = ["table", "armoire0", "tv"]
+            let randNumber = random() % 3
+            node = PreloadData.makeSKSPriteNode(sprite[Int(randNumber)])
+            if randNumber == 2 {
+                node.size = CGSizeMake(node.size.width + 1, node.size.height + 1)
+            }
+            node.name = "itemMalus"
         default: return Void()
         }
 
-        node.name = "item"
         
         node.position = CGPointMake(position.x, position.y + node.size.height / 2 + 7)
-        //node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(node.size.width / 2, node.size.height / 2))
-        node.physicsBody?.affectedByGravity = true
-//        node.position = CGPointMake((CGFloat(rand()) % (widthSize / 2)) + position.x,
-//            position.y + node.size.height / 2 + 7)
         switch randomNumber {
-        case 0:
-            node.physicsBody?.categoryBitMask = CollisionCategory.ItemBonus.rawValue
+        case 0, 1:
             let tableAnimation = SKAction.sequence([SKAction.colorizeWithColor(UIColor.greenColor().colorWithAlphaComponent(0.8), colorBlendFactor: 1, duration: 0.5),
             SKAction.colorizeWithColorBlendFactor(0, duration: 0.5)])
             
             node.runAction(SKAction.repeatActionForever(tableAnimation))
-        case 1:
-            node.physicsBody?.categoryBitMask = CollisionCategory.ItemMalus.rawValue
-
+        case 2:
             let tableAnimation = SKAction.sequence([SKAction.colorizeWithColor(UIColor.redColor().colorWithAlphaComponent(0.8), colorBlendFactor: 1, duration: 0.5),
                 SKAction.colorizeWithColorBlendFactor(0, duration: 0.5)])
             
             node.runAction(SKAction.repeatActionForever(tableAnimation))
-
-        case 2:
-            node.physicsBody?.categoryBitMask = CollisionCategory.ItemNone.rawValue
         default:Void()
         }
-        
-        node.physicsBody?.usesPreciseCollisionDetection = true
-        
-        node.physicsBody?.collisionBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Plateform.rawValue
-        node.physicsBody?.contactTestBitMask = CollisionCategory.Player.rawValue | CollisionCategory.Floor.rawValue |
-            CollisionCategory.Plateform.rawValue | CollisionCategory.Down.rawValue
-
         node.zPosition = 3
-        
         scene.addChild(node)
     }
 }

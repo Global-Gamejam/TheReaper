@@ -21,7 +21,6 @@ class Monster: NSObject {
         self.node.zPosition = 2
         self.node.position = CGPointMake(30, UIScreen.mainScreen().bounds.size.height / 3 + self.node.size.height / 2 + 5)
         self.node.name = "monster"
-        self.node.shadowCastBitMask = 1
         println("init")
         self.initAnimationSprite()
         println("run")

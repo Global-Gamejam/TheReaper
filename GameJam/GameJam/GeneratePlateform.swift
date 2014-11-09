@@ -117,9 +117,21 @@ class GeneratePlateform: NSObject {
         scene.enumerateChildNodesWithName("item", usingBlock: { (node: SKNode!, obj:UnsafeMutablePointer<ObjCBool>) -> Void in
             node.position = CGPointMake(node.position.x - HouseContainer.sharedInstance.currentSpeed, node.position.y)
             
-            if node.position.x - node.frame.size.width / 2 <= 5 {
-                node.physicsBody = nil
+            if node.position.x + node.frame.size.width / 2 <= 0 {
+                node.removeFromParent()
             }
+        })
+
+        scene.enumerateChildNodesWithName("itemBonus", usingBlock: { (node: SKNode!, obj:UnsafeMutablePointer<ObjCBool>) -> Void in
+            node.position = CGPointMake(node.position.x - HouseContainer.sharedInstance.currentSpeed, node.position.y)
+            
+            if node.position.x + node.frame.size.width / 2 <= 0 {
+                node.removeFromParent()
+            }
+        })
+
+        scene.enumerateChildNodesWithName("itemMalus", usingBlock: { (node: SKNode!, obj:UnsafeMutablePointer<ObjCBool>) -> Void in
+            node.position = CGPointMake(node.position.x - HouseContainer.sharedInstance.currentSpeed, node.position.y)
             
             if node.position.x + node.frame.size.width / 2 <= 0 {
                 node.removeFromParent()

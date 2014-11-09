@@ -11,7 +11,7 @@ import SpriteKit
 
 class ParticuleManager: NSObject {
     class func runParticule(scene: SKScene, position: CGPoint) {
-        let particulePath = NSBundle.mainBundle().pathForResource("Broke", ofType: "sks")
+        let particulePath = NSBundle.mainBundle().pathForResource("Smoke", ofType: "sks")
         let particule: SKEmitterNode? = NSKeyedUnarchiver.unarchiveObjectWithFile(particulePath!) as? SKEmitterNode
         
         particule?.particlePosition = position;
