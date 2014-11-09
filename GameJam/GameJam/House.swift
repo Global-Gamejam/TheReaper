@@ -73,6 +73,7 @@ class HouseContainer: NSObject {
     
     private class func initSpriteHousePart(scene: SKScene) {
         var positionX: CGFloat = UIScreen.mainScreen().bounds.size.height / 2
+        
         for var index = 0; index < 3; index++ {
             var currentSprite: SKSpriteNode = HousePart.getSKSPriteNode(self.sharedInstance.container[0].housePart[index])()
             currentSprite.position = CGPointMake(positionX, currentSprite.size.height / 2)
@@ -85,6 +86,12 @@ class HouseContainer: NSObject {
     }
     
     class func initHouseContainer(scene: SKScene) {
+        self.sharedInstance.container = Array<House>()
+        self.sharedInstance.currentSprite = Array<SKSpriteNode>()
+        self.sharedInstance.index = 2
+        self.sharedInstance.currentSpeed = 5.0
+        self.sharedInstance.currentKindHouse = 0
+
         for var index = 1; index < 100; index++ {
             self.sharedInstance.container.append(House.generateHouse(index))
         }

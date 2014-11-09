@@ -41,7 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PreloadData.addData(SKTexture(imageNamed: "table+bouteilles3"), key: "table+bouteilles3")
         PreloadData.addData(SKTexture(imageNamed: "table+bouteilles4"), key: "table+bouteilles4")
         
-        
+        PreloadData.addData(SKTexture(imageNamed: "bibli1"), key: "bibli1")
+        PreloadData.addData(SKTexture(imageNamed: "bibli2"), key: "bibli2")
+        PreloadData.addData(SKTexture(imageNamed: "bibli3"), key: "bibli3")
+        PreloadData.addData(SKTexture(imageNamed: "bibli4"), key: "bibli4")
         
         //monster loading
         PreloadData.addData(SKTexture(imageNamed: "monster1"), key: "monster1")
@@ -71,25 +74,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for var index = 2; index < 22; index++ {
             PreloadData.addData(SKTexture(imageNamed: "frame\(index)"), key: "frame\(index)")
         }
-        
         for var index = 1; index < 12; index++ {
             PreloadData.addData(SKTexture(imageNamed: "course\(index)"), key: "course\(index)")
         }
-        
         for var index = 1; index < 11; index++ {
             PreloadData.addData(SKTexture(imageNamed: "mere\(index)"), key: "mere\(index)")
         }
-        
         for var index = 1; index < 11; index++ {
             PreloadData.addData(SKTexture(imageNamed: "anim\(index)"), key: "anim\(index)")
         }
-
         for var index = 1; index < 9; index++ {
             PreloadData.addData(SKTexture(imageNamed: "suiveur\(index)"), key: "suiveur\(index)")
         }
-        
         for var index = 1; index < 5; index++ {
             PreloadData.addData(SKTexture(imageNamed: "animcabinet\(index)"), key: "animcabinet\(index)")            
+        }
+        for var index = 1; index < 10; index++ {
+            PreloadData.addData(SKTexture(imageNamed: "rframe\(index)"), key: "rframe\(index)")
+        }
+        for var index = 1; index < 9; index++ {
+            PreloadData.addData(SKTexture(imageNamed: "frag\(index)"), key: "frag\(index)")
+        }
+        for var index = 1; index < 9; index++ {
+            PreloadData.addData(SKTexture(imageNamed: "kill\(index)"), key: "kill\(index)")
+        }
+        for var index = 1; index < 12; index++ {
+            PreloadData.addData(SKTexture(imageNamed: "tue\(index)"), key: "tue\(index)")
         }
         
     }

@@ -72,6 +72,7 @@ extension GameScene {
             framesAnimations.append(PreloadData.getData("suiveur\(index)") as SKTexture)
         }
         
+        node.size = CGSizeMake(node.size.width + 5, node.size.height + 5)
         
         let animation = SKAction.sequence([SKAction.animateWithTextures(framesAnimations, timePerFrame: 0.05)])
         node.runAction(SKAction.repeatActionForever(animation))

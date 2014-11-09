@@ -17,15 +17,15 @@ extension GameScene {
 
 class GenerateItem: NSObject {
     class func addItem(scene: SKScene, position: CGPoint, widthSize: CGFloat) {
-        let randomNumber = rand() % 3
+        let randomNumber = rand() % 4
         var node: SKSpriteNode!
 
         switch randomNumber {
-        case 0, 1:
-            let sprite = ["cabinet", "baseWatch"]
-            node = PreloadData.makeSKSPriteNode(sprite[random() % 2])
+        case 0:
+            let sprite = ["cabinet", "baseWatch", "bibli1"]
+            node = PreloadData.makeSKSPriteNode(sprite[random() % 3])
             node.name = "itemBonus"
-        case 2:
+        case 1, 2, 3:
             let sprite = ["table", "armoire0", "tv"]
             let randNumber = random() % 3
             node = PreloadData.makeSKSPriteNode(sprite[Int(randNumber)])
@@ -39,12 +39,12 @@ class GenerateItem: NSObject {
         
         node.position = CGPointMake(position.x, position.y + node.size.height / 2 + 7)
         switch randomNumber {
-        case 0, 1:
+        case 0:
             let tableAnimation = SKAction.sequence([SKAction.colorizeWithColor(UIColor.greenColor().colorWithAlphaComponent(0.8), colorBlendFactor: 1, duration: 0.5),
             SKAction.colorizeWithColorBlendFactor(0, duration: 0.5)])
             
             node.runAction(SKAction.repeatActionForever(tableAnimation))
-        case 2:
+        case 1, 2, 3:
             let tableAnimation = SKAction.sequence([SKAction.colorizeWithColor(UIColor.redColor().colorWithAlphaComponent(0.8), colorBlendFactor: 1, duration: 0.5),
                 SKAction.colorizeWithColorBlendFactor(0, duration: 0.5)])
             

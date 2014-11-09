@@ -160,12 +160,12 @@
 				BBB1C2201A0E18CB00633AD9 /* Collision.swift */,
 				BBDCC5C91A0D6A0F00AA479F /* GameViewController.swift */,
 				BBDCC5CB1A0D6A0F00AA479F /* Main.storyboard */,
+				F90A8E251A0EE4CA00661104 /* MenuScene.swift */,
 				BBB1C2371A0F26D900633AD9 /* Songs */,
 				BBB1C22A1A0E722D00633AD9 /* Particules */,
 				BBDCC5CE1A0D6A1000AA479F /* Images.xcassets */,
 				BBDCC5D01A0D6A1000AA479F /* LaunchScreen.xib */,
 				BBDCC5C11A0D6A0F00AA479F /* Supporting Files */,
-				F90A8E251A0EE4CA00661104 /* MenuScene.swift */,
 			);
 			path = GameJam;
 			sourceTree = "<group>";
@@ -244,11 +244,11 @@
 				TargetAttributes = {
 					BBDCC5BD1A0D6A0F00AA479F = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = TWD5NHZ9QB;
+						DevelopmentTeam = 44Q2J6374R;
 					};
 					BBDCC5D61A0D6A1000AA479F = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = TWD5NHZ9QB;
+						DevelopmentTeam = 44Q2J6374R;
 						TestTargetID = BBDCC5BD1A0D6A0F00AA479F;
 					};
 				};
@@ -442,7 +442,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Remi Robert (X7FSUL94M6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GameJam/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -457,7 +457,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Remi Robert (X7FSUL94M6)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = GameJam/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

@@ -59,7 +59,6 @@ extension GameScene: SKPhysicsContactDelegate {
 //            self.player.isJumping = false
         default: return Void()
         }
-        println("current position Y : \(self.player.playerSprite.position.y)")
     }
     
     private func handleItemCollision(categoryNode: (CollisionCategory, CollisionCategory), node: SKNode) {
@@ -71,7 +70,6 @@ extension GameScene: SKPhysicsContactDelegate {
             //ParticuleManager.runParticule(self, position: node.position)
         case (CollisionCategory.Player, CollisionCategory.ItemBonus), (CollisionCategory.ItemBonus, CollisionCategory.Player):
             if self.player.playerSprite.position.x + 5 <= self.size.width / 2 {
-                println(node.name)
                 node.removeFromParent()
                 self.player.playerSprite.runAction(SKAction.moveToX(self.player.playerSprite.position.x + 5, duration: 0.5))
             }
@@ -95,16 +93,4 @@ extension GameScene: SKPhysicsContactDelegate {
             self.monster.updatePosition(self.player)
         }
     }
-    
-//    func didBeginContact(contact: SKPhysicsContact) {
-//        if contact.bodyA.node?.name == nil || contact.bodyB.node?.name == nil {
-//            return Void()
-//        }
-//        
-//        let categoryNode: (CollisionCategory, CollisionCategory) = (CollisionCategory(rawValue:
-//            (contact.bodyA.node?.physicsBody!.categoryBitMask)!)!,
-//            CollisionCategory(rawValue: (contact.bodyB.node?.physicsBody!.categoryBitMask)!)!)
-// 
-//        self.handleItemCollision(categoryNode, node: ((contact.bodyA.node!.name! == "player") ? contact.bodyB.node! : contact.bodyA.node!))
-//    }
 }

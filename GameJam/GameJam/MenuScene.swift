@@ -14,7 +14,11 @@ class MenuScene: SKScene {
     var player = Player()
     var monster = Monster()
     
-    override func didMoveToView(view: SKView) {
+    override init(size: CGSize) {
+        super.init(size: size)
+        
+        self.runAction(SKAction.repeatActionForever(SKAction.playSoundFileNamed("main.mp3", waitForCompletion: true)))
+        
         self.play = SKLabelNode(text: "PLAY")
         self.play.position = CGPointMake(self.size.width / 2 + 50 , self.size.height / 2)
         self.play.fontSize = 100
@@ -33,13 +37,19 @@ class MenuScene: SKScene {
         self.player.playerSprite.yScale = 2
         self.player.playerSprite.physicsBody?.affectedByGravity = false
         self.player.playerSprite.position = CGPointMake(self.size.width - 200, self.size.height / 3 + self.player.playerSprite.size.height / 2 + 50)
-
+        
         self.player.ligth.enabled = false
         
         self.addChild(self.monster.node)
         self.addChild(self.play)
         self.addChild(self.player.playerSprite)
+    }
 
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func didMoveToView(view: SKView) {
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -52,16 +62,20 @@ class MenuScene: SKScene {
         let touchedNode = self.nodeAtPoint(location!)
         
         if touchedNode.name == "play" {
-            println("totot")
-            let transition = SKTransition.crossFadeWithDuration(0.1)
-            let myScene = GameScene(size: self.size)
-            myScene.scaleMode = SKSceneScaleMode.AspectFill
-            self.view?.presentScene(myScene, transition: transition)
+            
+            let skView = self.view! as SKView
+            skView.ignoresSiblingOrder = true
+            let scene = GameScene(size: skView.bounds.size, menu: self)
+            scene.scaleMode = .AspectFill
+            skView.presentScene(scene)
+            
+//            let transition = SKTransition.crossFadeWithDuration(0.1)
+//            var myScene = GameScene(size: self.size, menu: self)
+//            myScene.menu = self
+//            skView.ignoresSiblingOrder = true
+//            myScene.scaleMode = SKSceneScaleMode.AspectFill
+//            self.view?.presentScene(myScene, transition: transition)
         }
-        
-        
-        
-        
         
     }
     
