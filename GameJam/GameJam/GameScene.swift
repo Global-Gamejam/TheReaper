@@ -78,25 +78,25 @@ class GameScene: SKScene {
             
             if node.intersectsNode(self.player.playerSprite) {
                 self.player.playerSprite.runAction(SKAction.playSoundFileNamed("crash.mp3", waitForCompletion: true))
-                self.player.playerSprite.position = CGPointMake(self.player.playerSprite.position.x - 40, self.player.playerSprite.position.y)
-
+                self.player.playerSprite.position = CGPointMake(self.player.playerSprite.position.x - 25, self.player.playerSprite.position.y)
+                
                 node.name = "item"
                 switch (node.frame.size.width, node.frame.size.height) {
                 case (64.5, 75.0):
                     node.runAction(SKAction.animateWithTextures([PreloadData.getData("table+bouteilles1"),
                         PreloadData.getData("table+bouteilles2"), PreloadData.getData("table+bouteilles3"),
-                        PreloadData.getData("table+bouteilles4")], timePerFrame: 0.04, resize: false, restore: false))
+                        PreloadData.getData("table+bouteilles4")], timePerFrame: 0.04, resize: true, restore: false))
                     break
-                case (175.0, 150.5):
-                    node.position = CGPointMake(node.position.x - 20, node.position.y - 10)
+                case (39.0, 78.5):
+                    node.position = CGPointMake(node.position.x + 30, node.position.y + 30)
                     node.runAction(SKAction.animateWithTextures([PreloadData.getData("armoire1"),
                         PreloadData.getData("armoire2"), PreloadData.getData("armoire3"),
                         PreloadData.getData("armoire4")], timePerFrame: 0.04, resize: true, restore: false))
                     break
-                case (176.0, 151.5):
+                case (65.5, 113.0):
                     node.runAction(SKAction.animateWithTextures([PreloadData.getData("TV1"),
                         PreloadData.getData("TV2"), PreloadData.getData("TV3"),
-                        PreloadData.getData("TV4")], timePerFrame: 0.04, resize: false, restore: false))
+                        PreloadData.getData("TV4")], timePerFrame: 0.04, resize: true, restore: false))
                     break
                 default: return Void()
                 }
@@ -107,10 +107,12 @@ class GameScene: SKScene {
         self.enumerateChildNodesWithName("itemBonus", usingBlock: { (node: SKNode!, objc: UnsafeMutablePointer<ObjCBool>) -> Void in
             if node.intersectsNode(self.player.playerSprite) {
                 node.name = "item"
+            
+                println("\(node.frame.size)")
 
                 self.player.playerSprite.runAction(SKAction.playSoundFileNamed("crash.mp3", waitForCompletion: true))
 
-                self.player.playerSprite.position = CGPointMake(self.player.playerSprite.position.x + 10, self.player.playerSprite.position.y)
+                self.player.playerSprite.position = CGPointMake(self.player.playerSprite.position.x + 20, self.player.playerSprite.position.y)
                 switch (node.frame.size.width, node.frame.size.height) {
                 case (105.5, 110):
                     node.position = CGPointMake(node.position.x, node.position.y + 20)
@@ -122,7 +124,8 @@ class GameScene: SKScene {
                     node.runAction(SKAction.animateWithTextures([PreloadData.getData("watch1"),
                         PreloadData.getData("watch2"), PreloadData.getData("watch3"),
                         PreloadData.getData("watch4")], timePerFrame: 0.04, resize: true, restore: false))
-                case (235.5, 150.5):
+                case (114.0,65.5):
+                    node.position = CGPointMake(node.position.x, node.position.y + 30)
                     node.runAction(SKAction.animateWithTextures([PreloadData.getData("bibli1"),
                         PreloadData.getData("bibli2"), PreloadData.getData("bibli3"),
                         PreloadData.getData("bibli4")], timePerFrame: 0.04, resize: true, restore: false))
@@ -170,27 +173,6 @@ class GameScene: SKScene {
                         })
                     })
                     self.addChild(sprite)
-                                        
-                    
-                case (110, 110):
-                    var sprite = PreloadData.makeSKSPriteNode("frag1")
-                    sprite.size = CGSizeMake(sprite.size.width * 2, sprite.size.height * 2)
-
-                    sprite.zPosition = 10
-                    sprite.position = CGPointMake(self.size.width / 2, self.size.height / 2)
-                    
-                    var arrayTexture = Array<SKTexture>()
-                    
-                    for var index = 1; index < 9; index++ {
-                        arrayTexture.append((PreloadData.getData("frag\(index)") as SKTexture))
-                    }
-                    
-                    sprite.runAction(SKAction.animateWithTextures(arrayTexture, timePerFrame: 0.2), completion: { () -> Void in
-                        sprite.runAction(SKAction.waitForDuration(2), completion: { () -> Void in
-                            self.displayMenu()
-                        })
-                    })
-                    self.addChild(sprite)
                     
                 case (125.0, 125.0):
                     var sprite = PreloadData.makeSKSPriteNode("kill1")
@@ -210,9 +192,27 @@ class GameScene: SKScene {
                         })
                     })
                     self.addChild(sprite)
- 
+                 
+                default:
+                    var sprite = PreloadData.makeSKSPriteNode("frag1")
+                    sprite.size = CGSizeMake(sprite.size.width * 2, sprite.size.height * 2)
                     
-                default: Void()
+                    sprite.zPosition = 10
+                    sprite.position = CGPointMake(self.size.width / 2, self.size.height / 2)
+                    
+                    var arrayTexture = Array<SKTexture>()
+                    
+                    for var index = 1; index < 9; index++ {
+                        arrayTexture.append((PreloadData.getData("frag\(index)") as SKTexture))
+                    }
+                    
+                    sprite.runAction(SKAction.animateWithTextures(arrayTexture, timePerFrame: 0.2), completion: { () -> Void in
+                        sprite.runAction(SKAction.waitForDuration(2), completion: { () -> Void in
+                            self.displayMenu()
+                        })
+                    })
+                    self.addChild(sprite)
+
                 }
                 
             }
@@ -257,7 +257,7 @@ class GameScene: SKScene {
             self.currentTime += 3
         }
         if self.currentTimeSong == 0 {
-            self.currentTimeSong += 15
+            self.currentTimeSong += 0
         }
         self.brume.position = CGPointMake(self.brume.position.x - 1, self.brume.position.y)
         
@@ -274,11 +274,11 @@ class GameScene: SKScene {
             if self.currentSong == 4 {
                 self.currentSong = 0
             }
-            self.currentTimeSong += currentTime + 25
+            self.currentTimeSong += currentTime + 10
         }
         
         self.enumerateChildNodesWithName("secondMonster", usingBlock: { (node: SKNode!, objc: UnsafeMutablePointer<ObjCBool>) -> Void in
-            node.position = CGPointMake(node.position.x - HouseContainer.sharedInstance.currentSpeed * 2, node.position.y)
+            node.position = CGPointMake(node.position.x - HouseContainer.sharedInstance.currentSpeed - 0.5, node.position.y)
             
             if node.position.x + node.frame.size.width / 2 <= 0 {
                 node.removeFromParent()

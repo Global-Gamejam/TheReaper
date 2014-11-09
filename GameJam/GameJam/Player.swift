@@ -42,6 +42,27 @@ class Player: NSObject {
         playerSprite.name = "player"
         playerSprite.position = CGPoint(x: UIScreen.mainScreen().bounds.size.width / 3, y: UIScreen.mainScreen().bounds.size.height / 2)
         playerSprite.zPosition = 2
+        
+        
+//        var offsetX = playerSprite.frame.size.width * playerSprite.anchorPoint.x
+//        var offsetY = playerSprite.frame.size.height * playerSprite.anchorPoint.y
+//        
+//        var path: CGMutablePathRef = CGPathCreateMutable();
+//        
+//        CGPathMoveToPoint(path, nil, 46 - offsetX, 84 - offsetY);
+//        CGPathAddLineToPoint(path, nil, 37 - offsetX, 77 - offsetY);
+//        CGPathAddLineToPoint(path, nil, 34 - offsetX, 68 - offsetY);
+//        CGPathAddLineToPoint(path, nil, 30 - offsetX, 51 - offsetY);
+//        CGPathAddLineToPoint(path, nil, 32 - offsetX, 18 - offsetY);
+//        CGPathAddLineToPoint(path, nil, 37 - offsetX, 10 - offsetY);
+//        CGPathAddLineToPoint(path, nil, 52 - offsetX, 8 - offsetY);
+//        CGPathAddLineToPoint(path, nil, 64 - offsetX, 28 - offsetY);
+//        CGPathAddLineToPoint(path, nil, 53 - offsetX, 75 - offsetY);
+//        CGPathCloseSubpath(path);
+//        
+//        playerSprite.physicsBody = SKPhysicsBody(polygonFromPath: path)
+        
+        
         playerSprite.physicsBody = SKPhysicsBody(rectangleOfSize: self.playerSprite.size)
         playerSprite.physicsBody?.dynamic = true
         playerSprite.physicsBody?.affectedByGravity = true
@@ -82,7 +103,7 @@ class Player: NSObject {
             return Void()
         }
         self.isJumping = true
-        playerSprite.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 260))
+        playerSprite.physicsBody?.applyImpulse(CGVector(dx: 0.0, dy: 250))
         self.playerSprite.runAction(SKAction.waitForDuration(0.70), completion: { () -> Void in
             self.isJumping = false
         })

@@ -139,7 +139,7 @@ class GeneratePlateform: NSObject {
         })
         
         scene.enumerateChildNodesWithName("monsterAdd", usingBlock: { (node: SKNode!, objc: UnsafeMutablePointer<ObjCBool>) -> Void in
-            node.position = CGPointMake(node.position.x - HouseContainer.sharedInstance.currentSpeed - 1, node.position.y)
+            node.position = CGPointMake(node.position.x - HouseContainer.sharedInstance.currentSpeed, node.position.y)
             
             if node.position.x + node.frame.size.width / 2 <= 0 {
                 node.removeFromParent()
