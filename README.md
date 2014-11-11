@@ -8,8 +8,8 @@ The challenge of the **game jam**, is to make a game during 48hours, on on a giv
 
 <hr>
 <h3 align="center">The Team:</h3>
-- [Julien GENOUD](fr.linkedin.com/pub/julien-genoud/6a/873/88a) (Developer Android / iOS)
-- [Rémi ROBERT](fr.linkedin.com/pub/rémi-robert/69/a58/704) (Developer iOS)
+- [Julien GENOUD](https://www.linkedin.com/pub/julien-genoud/6a/873/88a) (Developer Android / iOS)
+- [Rémi ROBERT](https://www.linkedin.com/pub/rémi-robert/69/a58/704) (Developer iOS)
 - Alexandre QUINTIN (Designer - game Design)
 <hr>
 <p align="center">
