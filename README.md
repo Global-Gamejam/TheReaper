@@ -10,7 +10,7 @@ The challenge of the **game jam**, is to make a game during 48hours, on on a giv
 - [Julien GENOUD](fr.linkedin.com/pub/julien-genoud/6a/873/88a) (Developer Android / iOS)
 - [Rémi ROBERT](fr.linkedin.com/pub/rémi-robert/69/a58/704) (Developer iOS)
 - Alexandre QUINTIN (Designer - game Design)
-
+<hr>
 <p align="center">
   <img src ="https://raw.githubusercontent.com/JulienGenoud/TheReaper/master/Ressources/monster1.gif"/>
 </p>
@@ -22,6 +22,7 @@ The challenge of the **game jam**, is to make a game during 48hours, on on a giv
 <p align="center">
   <img src ="https://raw.githubusercontent.com/JulienGenoud/TheReaper/master/Ressources/record1.gif"/>
 </p>
+<hr>
 
 <p align="center">
   <img src ="https://raw.githubusercontent.com/JulienGenoud/TheReaper/master/Ressources/monster.png"/>
