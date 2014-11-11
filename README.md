@@ -1,7 +1,7 @@
-<h1 align="center">The Reaper</h1>
 <p align="center">
   <img src ="https://raw.githubusercontent.com/JulienGenoud/TheReaper/master/Ressources/player.gif"/>
 </p>
+<h1 align="center">The Reaper</h1>
 
 The Reaper is an iOS game during the **Global game jam** at Bordeaux, in the EPITECH School (7-8 november 2014).
 The challenge of the **game jam**, is to make a game during 48hours, on on a given topic, and with the technology of our choice. For build this game, we use **SpriteKit** for **iOS 8**, using **Switf**. We our passionate about the mobile development, that's why we choose this technologie.
