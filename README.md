@@ -11,13 +11,17 @@ The challenge of the **game jam**, is to make a game during 48hours, on on a giv
 - [Rémi ROBERT](fr.linkedin.com/pub/rémi-robert/69/a58/704) (Developer iOS)
 - Alexandre QUINTIN (Designer - game Design)
 
-<h3 align="center">The Goal</h3>
-**The Reaper** is a runner, in a scary environment. The goal is, running and as far as possible without getting caught by the monsters. You can put obstacles in the way of watches (Green in the game). But be carefull to the red obstacles, they slow you down.
-
 <p align="center">
   <img src ="https://raw.githubusercontent.com/JulienGenoud/TheReaper/master/Ressources/monster1.gif"/>
 </p>
 
+<h3 align="center">The Goal</h3>
+**The Reaper** is a runner, in a scary environment. The goal is, running and as far as possible without getting caught by the monsters. You can put obstacles in the way of watches (Green in the game). But be carefull to the red obstacles, they slow you down.
+
+<h3 align="center">Demonstration</h3>
+<p align="center">
+  <img src ="https://raw.githubusercontent.com/JulienGenoud/TheReaper/master/Ressources/record1.gif"/>
+</p>
 
 <p align="center">
   <img src ="https://raw.githubusercontent.com/JulienGenoud/TheReaper/master/Ressources/monster.png"/>
